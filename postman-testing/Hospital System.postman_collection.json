@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "4007c942-76cf-4df1-8fb4-4fbb85490805",
+		"name": "Hospital System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24295379"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "All Patients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Patient ID</th>",
+									"        <th>First Name</th>",
+									"        <th>Last Name</th>",
+									"        <th>Gender</th>",
+									"        <th>Date of Birth</th>",
+									"        <th>Contact Number</th>",
+									"        <th>Address</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response}}",
+									"        <tr>",
+									"            <td>{{patientId}}</td>",
+									"            <td>{{firstName}}</td>",
+									"            <td>{{lastName}}</td>",
+									"            <td>{{gender}}</td>",
+									"            <td>{{dateOfBirth}}</td>",
+									"            <td>{{contactNumber}}</td>",
+									"            <td>{{address}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()};",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Specific Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/patient/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"patient",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Matija\",\n  \"lastName\": \"Brnas\",\n  \"gender\": \"Male\",\n  \"dateOfBirth\": \"2002-05-04\",\n  \"contactNumber\": \"1234567890\",\n  \"address\": \"Jarunska ulica 86\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Matija\",\n  \"lastName\": \"Brnas\",\n  \"gender\": \"Male\",\n  \"dateOfBirth\": \"2002-05-04\",\n  \"contactNumber\": \"1234567890\",\n  \"address\": \"Jarunska ulica 86\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/delete-patient/40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"delete-patient",
+								"40"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "Save Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Richard\",\n  \"lastName\": \"Lee\",\n  \"specialization\": \"Cardiology\",\n  \"contactNumber\": \"0999988776\",\n  \"email\": \"richard.lee@example.com\",\n  \"address\": \"1357 Cedar Ln, Blueville, BV 13579\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-doctor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/doctors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/doctor/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"doctor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/delete-doctor/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"delete-doctor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "All Departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "A Department",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/department/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"department",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"departmentName\": \"Ophthalmology\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-department",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Department",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/delete-department/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"delete-department",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medication",
+			"item": [
+				{
+					"name": "All Medications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/medications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"medications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "A Medication",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/medication/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"medication",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Medication",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"medicationName\": \"Ciprofloxacin\",\n    \"description\": \"An antibiotic used to treat a number of bacterial infections.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-medication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-medication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Medication",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/delete-medication/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"delete-medication",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "All Appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "An Appointment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/appointment/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"appointment",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patientId\": 12,\n    \"doctorId\": 1,\n    \"appointmentDate\": \"2024-02-15\",\n    \"notes\": \"Second consultation for arm pain\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/delete-appointment/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"delete-appointment",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "http://localhost:7070/insert-staff",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Anna\",\n  \"lastName\": \"Martinez\",\n  \"role\": \"Receptionist\",\n  \"departmentId\": 10,\n  \"contactNumber\": \"555-0110\",\n  \"address\": \"321 Palm St, Twin Peaks\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-staff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-staff"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Save Invoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"patientId\": 10,\n  \"invoiceDate\": \"2023-07-01T00:00:00\",  \n  \"amount\": 1200.50,\n  \"paid\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7070/insert-invoice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"insert-invoice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
